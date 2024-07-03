@@ -68,10 +68,11 @@ JOIN student ON course_subscription.student_id = student.id
 WHERE course.department LIKE 'Chimica'
 
 -- 14. Visualizza i nomi degli studenti e i corsi che hanno frequentato nel 2022.
--- res: 6
-SELECT *
+-- res: 6 
+SELECT student.name AS student_name, student.subscription_year AS student_year, course.name AS course_name
 FROM student
 JOIN course_subscription ON student.id = course_subscription.student_id 
+JOIN course ON course_subscription.course_id = course.id 
 WHERE student.subscription_year = '2022'
 
 -- 15. Elencare i professori con i loro corsi e i relativi dipartimenti.
