@@ -9,7 +9,7 @@ WHERE department LIKE 'Informatica'
 -- res: 2
 SELECT *
 FROM student 
-WHERE subscription_year IN ('2021') 
+WHERE subscription_year LIKE ('2021') 
 
 -- 3. Visualizza tutti i corsi offerti dal dipartimento di Fisica.
 -- res: 1
@@ -19,7 +19,7 @@ WHERE department LIKE 'Fisica'
 
 -- 4. Mostra i nomi dei corsi insieme ai relativi dipartimenti.
 -- res: 10
-SELECT name as name_course, department as name_department
+SELECT name AS name_course, department AS name_department
 FROM course 
 
 -- 5. Conta il numero totale di studenti iscritti all'università.
@@ -30,14 +30,14 @@ FROM student
 -- Esercizi con GROUP BY e HAVING
 -- 6. Conta quanti corsi sono offerti in ogni dipartimento.
 -- res: 10 (uno per dipartimento)
-SELECT department, COUNT(*) as number_course
+SELECT department, COUNT(*) AS number_course
 FROM course GROUP BY department
 
 -- DELETED 7. Trova i dipartimenti che hanno più di 3 corsi. DELETED
 
 -- 8. Elenca il numero di studenti iscritti per ogni anno di iscrizione.
 -- res: 5 (3, 2, 2, 2, 1)
-SELECT subscription_year, COUNT(*) as number_subscription 
+SELECT subscription_year, COUNT(*) AS number_subscription 
 FROM student 
 GROUP BY subscription_year 
 
@@ -48,14 +48,14 @@ GROUP BY subscription_year
 -- Esercizi con JOIN
 -- 11. Mostra il nome di ogni studente insieme al nome del corso a cui sono iscritti.
 -- res: 30
-SELECT student.name as name_student, course.name as name_course
+SELECT student.name AS name_student, course.name AS name_course
 FROM student 
 JOIN course_subscription ON student.id = course_subscription.student_id
 JOIN course ON course.id = course_subscription.course_id 
 
 -- 12. Elenca tutti i corsi insieme ai nomi dei professori che li insegnano.
 -- res: 10
-SELECT course.name as course_name, professor.name as professor_name
+SELECT course.name AS course_name, professor.name AS professor_name
 FROM course 
 JOIN professor ON course.department = professor.department
 
@@ -65,7 +65,7 @@ SELECT student.name AS name_student, course.name AS course_name
 FROM course
 JOIN course_subscription ON course.id = course_subscription.course_id
 JOIN student ON course_subscription.student_id = student.id
-WHERE course.department = 'Chimica'
+WHERE course.department LIKE 'Chimica'
 
 -- 14. Visualizza i nomi degli studenti e i corsi che hanno frequentato nel 2022.
 -- res: 6
@@ -93,7 +93,7 @@ FROM course_subscription
 JOIN course ON course_subscription.course_id = course.id
 GROUP BY course.name
 ORDER BY number_subscription DESC
-LIMIT 1;
+LIMIT 1
 
 -- DELETED 20. Trova gli studenti che sono iscritti a più di 3 corsi. DELETED
 
